@@ -1,6 +1,6 @@
 ﻿using Dapper;
-using FinancasParaCasais.Application.DTOs;
 using FinancasParaCasais.Application.Interfaces.QueryServices;
+using FinancasParaCasais.Application.QueryResults;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
@@ -15,7 +15,7 @@ namespace FinancasParaCasais.Application.QueryServices
             _configuration = configuration;
         }
 
-        public IReadOnlyCollection<ConjugeDTO> ObterConjuges()
+        public IReadOnlyCollection<ConjugeQueryResult> ObterConjuges()
         {
             using var connection = new SqlConnection(_configuration.GetConnectionString("FinancasParaCasaisDB"));
 
@@ -23,7 +23,7 @@ namespace FinancasParaCasais.Application.QueryServices
                 SELECT  Codigo, Nome, Percentual
                 FROM    dbo.Conjuges";
 
-            var conjuges = connection.Query<ConjugeDTO>(sql);
+            var conjuges = connection.Query<ConjugeQueryResult>(sql);
 
             return conjuges.ToList();
         }

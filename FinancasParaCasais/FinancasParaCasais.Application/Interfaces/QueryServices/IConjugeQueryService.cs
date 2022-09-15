@@ -1,9 +1,9 @@
-﻿using FinancasParaCasais.Application.DTOs;
+﻿using FinancasParaCasais.Application.QueryResults;
 
 namespace FinancasParaCasais.Application.Interfaces.QueryServices
 {
     public interface IConjugeQueryService
     {
-        IReadOnlyCollection<ConjugeDTO> ObterConjuges();
+        IReadOnlyCollection<ConjugeQueryResult> ObterConjuges();
     }
 }
