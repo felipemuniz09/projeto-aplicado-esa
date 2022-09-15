@@ -1,5 +1,4 @@
 ﻿using Flunt.Notifications;
-using Flunt.Validations;
 
 namespace FinancasParaCasais.Application.Commands
 {
@@ -16,12 +15,10 @@ namespace FinancasParaCasais.Application.Commands
 
         public void Validar()
         {
-            AddNotifications(new Contract<EditarConjugesCommand>()
-                .IsNotNull(Conjuges, "Conjuges", "Lista de conjuges deve ser informada.")
-                .IsNotEmpty(Conjuges, "Conjuges", "Lista de conjuges deve ser informada."));
-
-            if (Conjuges != null && Conjuges.Count != 2) 
+            if (Conjuges == null || Conjuges.Count != 2)
                 AddNotification("Conjuges", "Lista de conjuges deve conter 2 elementos.");
+            else if (Conjuges.Sum(c => c.Percentual) != 100)
+                AddNotification("Conjuges", "Somatório dos percentuais deve ser igual a 100.");
         }
     }
 }
