@@ -16,10 +16,10 @@ namespace FinancasParaCasais.Domain.Entities
             Percentual = percentual;
 
             AddNotifications(new Contract<Conjuge>()
-                .IsNotEmpty(Codigo, "Codigo", "Código deve ser informado")
-                .IsNotNullOrWhiteSpace(Nome, "Nome", "Nome deve ser informado")
-                .IsLowerOrEqualsThan(Nome.Length, 100, "Nome", "Nome possui tamanho máximo de 100 caracteres")
-                .IsBetween(Percentual, 0, 100, "Percentual", "O percentual deve ser um valor entre 0 e 100"));
+                .IsNotEmpty(Codigo, "Codigo", "Código deve ser informado.")
+                .IsNotNullOrWhiteSpace(Nome, "Nome", "Nome deve ser informado.")
+                .IsLowerOrEqualsThan(Nome.Length, 100, "Nome", "Nome possui tamanho máximo de 100 caracteres.")
+                .IsBetween(Percentual, 0, 100, "Percentual", "O percentual deve ser um valor entre 0 e 100."));
         }
     }
 }
