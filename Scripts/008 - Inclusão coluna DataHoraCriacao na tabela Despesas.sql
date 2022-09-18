@@ -1,0 +1,1 @@
+ALTER TABLE dbo.Despesas ADD DataHoraCriacao DATETIME CONSTRAINT NN_Despesas_DataHoraCriacao NOT NULL CONSTRAINT DF_Despesas_DataHoraCriacao DEFAULT GETDATE();    
