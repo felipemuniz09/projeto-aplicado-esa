@@ -20,6 +20,8 @@ namespace FinancasParaCasais.Repository.Repositories
             var conjugeEF = _mapper.Map<ConjugeEF>(conjuge);
 
             _context.Conjuges.Update(conjugeEF);
+
+            _context.SaveChanges();
         }
     }
 }

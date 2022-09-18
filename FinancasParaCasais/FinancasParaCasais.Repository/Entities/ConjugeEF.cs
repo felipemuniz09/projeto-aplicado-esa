@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinancasParaCasais.Repository.Entities
 {
@@ -6,6 +7,7 @@ namespace FinancasParaCasais.Repository.Entities
     public class ConjugeEF
     {
         [Column("Codigo")]
+        [Key]
         public Guid Codigo { get; set; }
 
         [Column("Nome")]
