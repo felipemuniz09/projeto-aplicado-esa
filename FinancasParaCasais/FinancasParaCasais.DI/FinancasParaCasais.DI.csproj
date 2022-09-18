@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FinancasParaCasais.Application\FinancasParaCasais.Application.csproj" />
+    <ProjectReference Include="..\FinancasParaCasais.Repository\FinancasParaCasais.Repository.csproj" />
   </ItemGroup>
 
 </Project>
