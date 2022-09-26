@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      working-directory: ../../FinancasParaCasais/FinancasParaCasais.Api
+      working-directory: ./FinancasParaCasais/FinancasParaCasais.Api
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
