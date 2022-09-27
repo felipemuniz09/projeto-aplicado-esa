@@ -1,4 +1,4 @@
-name: .NET
+name: CI
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  CI:
     runs-on: ubuntu-latest
     
     env:
@@ -34,7 +34,7 @@ jobs:
       uses: dorny/test-reporter@v1
       if: always()
       with:
-        name: DotNET Tests
+        name: DotNet Tests
         path: "**/test-results.trx"                            
         reporter: dotnet-trx
         fail-on-error: true
