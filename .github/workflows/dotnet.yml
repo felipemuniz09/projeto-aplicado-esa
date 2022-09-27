@@ -11,20 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      working-directory: ./FinancasParaCasais/FinancasParaCasais.Api
+      solution: ./FinancasParaCasais/FinancasParaCasais.sln
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+    
     - name: Restore dependencies
-      working-directory: ${{env.working-directory}}
-      run: dotnet restore
+      run: dotnet restore ${{solution}}
+    
     - name: Build
-      working-directory: ${{env.working-directory}}
-      run: dotnet build --no-restore
+      run: dotnet build ${{solution}} --no-restore 
+    
     - name: Test
-      working-directory: ${{env.working-directory}}
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ${{solution}} --no-build --verbosity normal
