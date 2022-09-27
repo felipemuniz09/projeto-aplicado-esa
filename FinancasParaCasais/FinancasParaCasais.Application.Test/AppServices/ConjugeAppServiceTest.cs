@@ -50,7 +50,7 @@ namespace FinancasParaCasais.Application.Test.AppServices
                     {
                         Codigo = Guid.NewGuid(),
                         Nome = "José",
-                        Percentual = 30
+                        Percentual = 60
                     }
                 }
             };
