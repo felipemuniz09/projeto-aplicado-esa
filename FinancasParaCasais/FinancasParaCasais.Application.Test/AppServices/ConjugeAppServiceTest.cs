@@ -33,7 +33,7 @@ namespace FinancasParaCasais.Application.Test.AppServices
         }
 
         [Fact]
-        public void DeveSalvarEdicaoDeCadaConjuge()
+        public void DeveSalvarEdicaoDeCadaConjugeQuandoCommandEstiverValido()
         {
             // Given
             var editarConjugesCommand = new EditarConjugesCommand
@@ -50,7 +50,7 @@ namespace FinancasParaCasais.Application.Test.AppServices
                     {
                         Codigo = Guid.NewGuid(),
                         Nome = "José",
-                        Percentual = 60
+                        Percentual = 80
                     }
                 }
             };
