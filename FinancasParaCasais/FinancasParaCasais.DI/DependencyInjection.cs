@@ -22,6 +22,7 @@ namespace FinancasParaCasais.DI
             
             // Query Services
             services.AddScoped<IConjugeQueryService, ConjugeQueryService>();
+            services.AddScoped<IDespesaQueryService, DespesaQueryService>();
             
             // App Services
             services.AddScoped<IConjugeAppService, ConjugeAppService>();

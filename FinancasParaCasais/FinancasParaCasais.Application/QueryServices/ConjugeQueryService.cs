@@ -6,14 +6,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace FinancasParaCasais.Application.QueryServices
 {
-    public class ConjugeQueryService : IConjugeQueryService
+    public class ConjugeQueryService : BaseQueryService, IConjugeQueryService
     {
-        private readonly IConfiguration _configuration;
-
         public ConjugeQueryService(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+            : base(configuration) { }
 
         public IReadOnlyCollection<ConjugeQueryResult> ObterConjuges()
         {

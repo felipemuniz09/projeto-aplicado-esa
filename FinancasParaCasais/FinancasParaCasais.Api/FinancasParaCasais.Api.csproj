@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Routers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FinancasParaCasais.Application\FinancasParaCasais.Application.csproj" />
     <ProjectReference Include="..\FinancasParaCasais.DI\FinancasParaCasais.DI.csproj" />
   </ItemGroup>
