@@ -5,16 +5,16 @@ using FinancasParaCasais.Repository.Entities;
 
 namespace FinancasParaCasais.Repository.Repositories
 {
-    public class ConjugeRepository : BaseRepository, IConjugeRepository
+    public class DespesaRepository : BaseRepository, IDespesaRepository
     {
-        public ConjugeRepository(FinancasParaCasaisContext context, IMapper mapper)
+        public DespesaRepository(FinancasParaCasaisContext context, IMapper mapper) 
             : base(context, mapper) { }
 
-        public void AtualizarConjuge(Conjuge conjuge)
+        public void InserirDespesa(Despesa despesa)
         {
-            var conjugeEF = _mapper.Map<ConjugeEF>(conjuge);
+            var despesaEF = _mapper.Map<DespesaEF>(despesa);
 
-            _context.Conjuges.Update(conjugeEF);
+            _context.Despesas.Add(despesaEF);
 
             _context.SaveChanges();
         }
