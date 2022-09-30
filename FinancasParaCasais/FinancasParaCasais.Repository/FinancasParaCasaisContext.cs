@@ -9,6 +9,7 @@ namespace FinancasParaCasais.Repository
         private readonly IConfiguration _configuration;
 
         public DbSet<ConjugeEF> Conjuges { get; set; }
+        public DbSet<DespesaEF> Despesas { get; set; }
 
         public FinancasParaCasaisContext(IConfiguration configuration)
         {
