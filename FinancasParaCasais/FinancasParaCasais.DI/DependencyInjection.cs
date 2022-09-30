@@ -1,5 +1,6 @@
 ﻿using FinancasParaCasais.Application.AppServices;
 using FinancasParaCasais.Application.Interfaces.AppService;
+using FinancasParaCasais.Application.Interfaces.AppServices;
 using FinancasParaCasais.Application.Interfaces.QueryServices;
 using FinancasParaCasais.Application.QueryServices;
 using FinancasParaCasais.Domain.Interfaces.Repositories;
@@ -35,16 +36,19 @@ namespace FinancasParaCasais.DI
         private static void RegisterAppServices(this IServiceCollection services)
         {
             services.AddScoped<IConjugeAppService, ConjugeAppService>();
+            services.AddScoped<IDespesaAppService, DespesaAppService>();
         }
 
         private static void RegisterDomainServices(this IServiceCollection services)
         {
             services.AddScoped<IConjugeService, ConjugeService>();
+            services.AddScoped<IDespesaService, DespesaService>();
         }
 
         private static void RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<IConjugeRepository, ConjugeRepository>();
+            services.AddScoped<IDespesaRepository, DespesaRepository>();
         }
     }
 }
