@@ -1,4 +1,5 @@
-﻿using FinancasParaCasais.Domain.Entities;
+﻿using Bogus.DataSets;
+using FinancasParaCasais.Domain.Entities;
 using FluentAssertions;
 
 namespace FinancasParaCasais.Domain.Test.Entities
@@ -38,11 +39,11 @@ namespace FinancasParaCasais.Domain.Test.Entities
         [Fact]
         public void DeveConsiderarInvalidoQuandoNomeExcederTamanhoMaximo() 
         {
+            // Given
+            var lorem = new Lorem("pt_BR");
+            var nomeMuitoGrande = lorem.Letter(101);
+
             // When
-            var random = new Random();
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var nomeMuitoGrande = new string(Enumerable.Repeat(chars, 101).Select(s => s[random.Next(s.Length)]).ToArray());
-            
             var conjuge = new Conjuge(Guid.NewGuid(), nomeMuitoGrande, 33);
 
             // Then
