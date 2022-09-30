@@ -1,9 +1,10 @@
 ﻿using FinancasParaCasais.Domain.ValueObject;
+using Flunt.Notifications;
 using Flunt.Validations;
 
 namespace FinancasParaCasais.Domain.Entities
 {
-    public class Despesa : BaseEntity
+    public class Despesa : Notifiable<Notification>
     {
         private readonly List<PagamentoDespesaValueObject> _pagamentos;
 
@@ -12,8 +13,7 @@ namespace FinancasParaCasais.Domain.Entities
         public DateTime DataHoraCriacao { get; private set; }
         public IReadOnlyCollection<PagamentoDespesaValueObject> Pagamentos => _pagamentos;
 
-        public Despesa(Guid codigo, string descricao, decimal valor) 
-            : base(codigo)
+        public Despesa(string descricao, decimal valor) 
         {
             _pagamentos = new List<PagamentoDespesaValueObject>();
 
@@ -34,20 +34,6 @@ namespace FinancasParaCasais.Domain.Entities
                 _pagamentos.Add(pagamentoDespesaValueObject);
 
             return pagamentoDespesaValueObject;
-        }
-
-        public void Validar()
-        {
-            if (_pagamentos.Count != 2)
-                AddNotification("Pagamentos", "Lista de pagamentos deve conter 2 elementos.");
-            else
-            {
-                var somaPagamentos = _pagamentos.Sum(p => p.Valor);
-                var diferencaEntreValorESomaPagamentos = Valor - somaPagamentos;
-
-                if (Math.Abs(diferencaEntreValorESomaPagamentos) > 0.009M)
-                    AddNotification("Pagamentos", "Soma dos pagamentos deve ser igual ao valor da despesa.");
-            }
         }
     }
 }

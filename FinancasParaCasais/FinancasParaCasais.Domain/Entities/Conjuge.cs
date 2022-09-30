@@ -1,14 +1,14 @@
-﻿using Flunt.Validations;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
 
 namespace FinancasParaCasais.Domain.Entities
 {
-    public class Conjuge : BaseEntity
+    public class Conjuge : Notifiable<Notification>
     {
         public string Nome { get; private set; }
         public int Percentual { get; private set; }
 
-        public Conjuge(Guid codigo, string nome, int percentual)
-            : base(codigo)
+        public Conjuge(string nome, int percentual)
         {
             Nome = nome;
             Percentual = percentual;
