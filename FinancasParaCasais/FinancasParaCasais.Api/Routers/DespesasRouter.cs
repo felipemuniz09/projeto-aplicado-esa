@@ -1,4 +1,6 @@
-﻿using FinancasParaCasais.Application.Interfaces.QueryServices;
+﻿using FinancasParaCasais.Application.Commands;
+using FinancasParaCasais.Application.Interfaces.AppServices;
+using FinancasParaCasais.Application.Interfaces.QueryServices;
 
 namespace FinancasParaCasais.Api.Routers
 {
@@ -7,6 +9,13 @@ namespace FinancasParaCasais.Api.Routers
         public static void MapDespesasRoutes(this WebApplication app)
         {
             app.MapGet("/despesas", (IDespesaQueryService despesaQueryService) => Results.Ok(despesaQueryService.ObterDespesas()));
+
+            app.MapPost("/despesas", (IDespesaAppService despesaAppService, InserirDespesaCommand inserirDespesaCommand) =>
+            {
+                despesaAppService.InserirDespesa(inserirDespesaCommand);
+
+                return Results.Ok();
+            });
         }
     }
 }
