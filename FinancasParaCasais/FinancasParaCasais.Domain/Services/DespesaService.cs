@@ -15,8 +15,6 @@ namespace FinancasParaCasais.Domain.Services
 
         public void InserirDespesa(Despesa despesa)
         {
-            despesa.Validar();
-
             if (despesa.IsValid)
                 _despesaRepository.InserirDespesa(despesa);
         }
