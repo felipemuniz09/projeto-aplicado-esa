@@ -20,7 +20,7 @@ namespace FinancasParaCasais.Domain.Test.Services
         public void NaoDeveAtualizarQuandoConjugeEstiverInvalido()
         {
             // Given
-            var conjuge = new Conjuge(Guid.NewGuid(), string.Empty, 50);
+            var conjuge = new Conjuge(string.Empty, 50);
 
             // When
             _conjugeService.EditarConjuge(conjuge);
@@ -33,7 +33,7 @@ namespace FinancasParaCasais.Domain.Test.Services
         public void DeveAtualizarQuandoConjugeEstiverValido()
         {
             // Given
-            var conjuge = new Conjuge(Guid.NewGuid(), "José", 65);
+            var conjuge = new Conjuge("José", 65);
 
             // When
             _conjugeService.EditarConjuge(conjuge);

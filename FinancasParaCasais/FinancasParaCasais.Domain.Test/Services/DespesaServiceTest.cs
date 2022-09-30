@@ -20,7 +20,7 @@ namespace FinancasParaCasais.Domain.Test.Services
         public void DeveInserirQuandoDespesaEstiverValida()
         {
             // Given
-            var despesa = new Despesa(Guid.NewGuid(), "Boleto de condomínio", 400);
+            var despesa = new Despesa("Boleto de condomínio", 400);
             despesa.AdicionarPagamento(Guid.NewGuid(), 200);
             despesa.AdicionarPagamento(Guid.NewGuid(), 200);
 
@@ -35,7 +35,7 @@ namespace FinancasParaCasais.Domain.Test.Services
         public void NaoDeveInserirQuandoDespesaEstiverInvalida()
         {
             // Given
-            var despesa = new Despesa(Guid.Empty, "Boleto de condomínio", 400);
+            var despesa = new Despesa("Boleto de condomínio", -400);
 
             // When
             _despesaService.InserirDespesa(despesa);

@@ -7,20 +7,10 @@ namespace FinancasParaCasais.Domain.Test.Entities
     public class ConjugeTest
     {
         [Fact]
-        public void DeveConsiderarInvalidoQuandoCodigoForVazio() 
-        {
-            // When
-            var conjuge = new Conjuge(Guid.Empty, "João", 43);
-
-            // Then
-            conjuge.Notifications.Should().Contain(n => n.Message == "Código deve ser informado.");
-        }
-
-        [Fact]
         public void DeveConsiderarInvalidoQuandoNomeForVazio() 
         { 
             // When
-            var conjuge = new Conjuge(Guid.NewGuid(), string.Empty, 43);
+            var conjuge = new Conjuge(string.Empty, 43);
 
             // Then
             conjuge.Notifications.Should().Contain(n => n.Message == "Nome deve ser informado.");
@@ -30,7 +20,7 @@ namespace FinancasParaCasais.Domain.Test.Entities
         public void DeveConsiderarInvalidoQuandoNomeForApenasEspacoEmBranco() 
         {
             // When
-            var conjuge = new Conjuge(Guid.NewGuid(), "   ", 70);
+            var conjuge = new Conjuge("   ", 70);
 
             // Then
             conjuge.Notifications.Should().Contain(n => n.Message == "Nome deve ser informado.");
@@ -44,7 +34,7 @@ namespace FinancasParaCasais.Domain.Test.Entities
             var nomeMuitoGrande = lorem.Letter(101);
 
             // When
-            var conjuge = new Conjuge(Guid.NewGuid(), nomeMuitoGrande, 33);
+            var conjuge = new Conjuge(nomeMuitoGrande, 33);
 
             // Then
             conjuge.Notifications.Should().Contain(n => n.Message == "Nome possui tamanho máximo de 100 caracteres.");
@@ -54,7 +44,7 @@ namespace FinancasParaCasais.Domain.Test.Entities
         public void DeveConsiderarPercentualInvalidoQuandoForMenorQueZero() 
         {
             // When
-            var conjuge = new Conjuge(Guid.NewGuid(), "Maria", -1);
+            var conjuge = new Conjuge("Maria", -1);
 
             // Then
             conjuge.Notifications.Should().Contain(n => n.Message == "O percentual deve ser um valor entre 0 e 100.");
@@ -64,7 +54,7 @@ namespace FinancasParaCasais.Domain.Test.Entities
         public void DeveConsiderarPercentualInvalidoQuandoForMaiorQueCem() 
         {
             // When
-            var conjuge = new Conjuge(Guid.NewGuid(), "Maria", 101);
+            var conjuge = new Conjuge("Maria", 101);
 
             // Then
             conjuge.Notifications.Should().Contain(n => n.Message == "O percentual deve ser um valor entre 0 e 100.");
