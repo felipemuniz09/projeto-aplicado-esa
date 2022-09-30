@@ -19,18 +19,31 @@ namespace FinancasParaCasais.DI
             services.AddScoped((s) => mapper);
 
             services.AddScoped<FinancasParaCasaisContext>();
-            
-            // Query Services
+
+            services.RegisterQueryServices();
+            services.RegisterAppServices();
+            services.RegisterDomainServices();
+            services.RegisterRepositories();
+        }
+
+        private static void RegisterQueryServices(this IServiceCollection services)
+        {
             services.AddScoped<IConjugeQueryService, ConjugeQueryService>();
             services.AddScoped<IDespesaQueryService, DespesaQueryService>();
-            
-            // App Services
+        }
+
+        private static void RegisterAppServices(this IServiceCollection services)
+        {
             services.AddScoped<IConjugeAppService, ConjugeAppService>();
+        }
 
-            // Services
+        private static void RegisterDomainServices(this IServiceCollection services)
+        {
             services.AddScoped<IConjugeService, ConjugeService>();
+        }
 
-            // Repositories
+        private static void RegisterRepositories(this IServiceCollection services)
+        {
             services.AddScoped<IConjugeRepository, ConjugeRepository>();
         }
     }
