@@ -10,6 +10,9 @@ namespace FinancasParaCasais.Api.Routers
         {
             app.MapGet("/despesas", (IDespesaQueryService despesaQueryService) => Results.Ok(despesaQueryService.ObterDespesas()));
 
+            app.MapGet("/despesas/{codigo}", (IDespesaQueryService despesaQueryService, Guid codigo) =>
+                Results.Ok(despesaQueryService.ObterDespesa(codigo)));
+
             app.MapPost("/despesas", (IDespesaAppService despesaAppService, InserirDespesaCommand inserirDespesaCommand) =>
             {
                 despesaAppService.InserirDespesa(inserirDespesaCommand);
