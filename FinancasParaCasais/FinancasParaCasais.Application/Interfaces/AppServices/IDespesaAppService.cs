@@ -5,5 +5,6 @@ namespace FinancasParaCasais.Application.Interfaces.AppServices
     public interface IDespesaAppService
     {
         void InserirDespesa(InserirDespesaCommand inserirDespesaCommand);
+        void ExcluirDespesa(Guid codigo);
     }
 }
