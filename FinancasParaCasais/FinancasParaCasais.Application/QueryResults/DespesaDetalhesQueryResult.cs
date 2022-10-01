@@ -11,6 +11,7 @@
         public DespesaDetalhesQueryResult()
         {
             Descricao = string.Empty;
+            Pagamentos = new List<PagamentoQueryResult>();
         }
 
         public class PagamentoQueryResult
