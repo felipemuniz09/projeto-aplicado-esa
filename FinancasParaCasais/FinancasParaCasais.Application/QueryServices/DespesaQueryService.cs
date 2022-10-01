@@ -11,7 +11,7 @@ namespace FinancasParaCasais.Application.QueryServices
         public DespesaQueryService(IConfiguration configuration)
             : base (configuration) { }
 
-        public IReadOnlyCollection<DespesaQueryResult> ObterDespesas()
+        public IReadOnlyCollection<DespesaListaQueryResult> ObterDespesas()
         {
             using var connection = new SqlConnection(_configuration.GetConnectionString("FinancasParaCasaisDB"));
 
@@ -19,9 +19,33 @@ namespace FinancasParaCasais.Application.QueryServices
                 SELECT  Codigo, Descricao, Valor, DataHoraCriacao
                 FROM    dbo.Despesas";
 
-            var despesas = connection.Query<DespesaQueryResult>(sql);
+            var despesas = connection.Query<DespesaListaQueryResult>(sql);
 
             return despesas.ToList();
+        }
+
+        public DespesaDetalhesQueryResult ObterDespesa(Guid codigo)
+        {
+            using var connection = new SqlConnection(_configuration.GetConnectionString("FinancasParaCasaisDB"));
+
+            var sql = @"
+                SELECT  Codigo, Descricao, Valor, DataHoraCriacao
+                FROM    dbo.Despesas
+                WHERE   Codigo = @codigo";
+
+            var despesa = connection.QueryFirstOrDefault<DespesaDetalhesQueryResult>(sql, new { codigo });
+
+            sql = @"
+                SELECT  c.Nome as NomeConjuge, dc.Valor
+                FROM    dbo.Conjuges c
+                JOIN    dbo.DespesaConjuge dc ON c.Codigo = dc.CodigoConjuge
+                WHERE   dc.CodigoDespesa = @codigoDespesa";
+
+            var pagamentos = connection.Query<DespesaDetalhesQueryResult.PagamentoQueryResult>(sql, new { codigoDespesa = codigo });
+
+            despesa.Pagamentos = pagamentos.ToList();
+
+            return despesa;
         }
     }
 }

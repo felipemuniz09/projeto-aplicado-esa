@@ -4,6 +4,7 @@ namespace FinancasParaCasais.Application.Interfaces.QueryServices
 {
     public interface IDespesaQueryService
     {
-        IReadOnlyCollection<DespesaQueryResult> ObterDespesas();
+        IReadOnlyCollection<DespesaListaQueryResult> ObterDespesas();
+        DespesaDetalhesQueryResult ObterDespesa(Guid codigo);
     }
 }
