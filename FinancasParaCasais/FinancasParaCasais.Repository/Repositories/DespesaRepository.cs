@@ -34,5 +34,27 @@ namespace FinancasParaCasais.Repository.Repositories
 
             transaction.Commit();
         }
+
+        public void ExcluirDespesa(Guid codigo)
+        {
+            var listaDespesaConjuge = _context.DespesaConjuge.Where(d => d.CodigoDespesa == codigo).ToList();
+            var despesa = _context.Despesas.FirstOrDefault(d => d.Codigo == codigo);
+
+            using var transaction = _context.Database.BeginTransaction();
+
+            if (listaDespesaConjuge.Any())
+            {
+                _context.DespesaConjuge.RemoveRange(listaDespesaConjuge);
+                _context.SaveChanges();
+            }
+
+            if (despesa != null)
+            {
+                _context.Despesas.Remove(despesa);
+                _context.SaveChanges();
+            }
+
+            transaction.Commit();
+        }
     }
 }
