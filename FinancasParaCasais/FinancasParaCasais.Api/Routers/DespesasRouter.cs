@@ -19,6 +19,13 @@ namespace FinancasParaCasais.Api.Routers
 
                 return Results.Ok();
             });
+
+            app.MapDelete("/despesas/{codigo}", (IDespesaAppService despesaAppService, Guid codigo) =>
+            {
+                despesaAppService.ExcluirDespesa(codigo);
+
+                return Results.Ok();
+            });
         }
     }
 }
