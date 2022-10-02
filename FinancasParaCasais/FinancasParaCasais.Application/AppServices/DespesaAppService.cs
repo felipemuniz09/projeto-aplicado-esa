@@ -19,9 +19,6 @@ namespace FinancasParaCasais.Application.AppServices
 
         public void InserirDespesa(InserirDespesaCommand inserirDespesaCommand)
         {
-            if (inserirDespesaCommand == null)
-                throw new ArgumentNullException(nameof(inserirDespesaCommand));
-
             inserirDespesaCommand.Validar();
 
             if (inserirDespesaCommand.IsValid)
