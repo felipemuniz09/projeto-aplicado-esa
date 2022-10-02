@@ -1,7 +1,9 @@
 ﻿using FinancasParaCasais.Application.AppServices;
 using FinancasParaCasais.Application.Interfaces.AppService;
 using FinancasParaCasais.Application.Interfaces.AppServices;
+using FinancasParaCasais.Application.Interfaces.Notifications;
 using FinancasParaCasais.Application.Interfaces.QueryServices;
+using FinancasParaCasais.Application.Notifications;
 using FinancasParaCasais.Application.QueryServices;
 using FinancasParaCasais.Domain.Interfaces.Repositories;
 using FinancasParaCasais.Domain.Interfaces.Services;
@@ -20,6 +22,8 @@ namespace FinancasParaCasais.DI
             services.AddScoped((s) => mapper);
 
             services.AddScoped<FinancasParaCasaisContext>();
+
+            services.AddScoped<INotificationService, NotificationService>();
 
             services.RegisterQueryServices();
             services.RegisterAppServices();
