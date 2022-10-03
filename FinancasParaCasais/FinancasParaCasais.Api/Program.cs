@@ -1,3 +1,4 @@
+using FinancasParaCasais.Api.Middlewares;
 using FinancasParaCasais.Api.Routers;
 using FinancasParaCasais.DI;
 
@@ -18,6 +19,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseNotificationMiddleware();
 
 app.MapConjugesRoutes();
 app.MapDespesasRoutes();
