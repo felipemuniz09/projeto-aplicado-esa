@@ -1,6 +1,7 @@
 ﻿using FinancasParaCasais.Application.Interfaces.Notifications;
 using System.Net;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FinancasParaCasais.Api.Middlewares
 {
@@ -18,15 +19,10 @@ namespace FinancasParaCasais.Api.Middlewares
 
             if (notifications.Any())
             {
-                /*var stream = new MemoryStream();
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(stream, notifications);*/
-
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                context.Response.ContentType = "text/plain";
+                context.Response.ContentType = Text.Plain;
                 await context.Response.WriteAsync(JsonSerializer.Serialize(notifications));
             }
-            
         }
     }
 
