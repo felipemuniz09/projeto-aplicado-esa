@@ -9,7 +9,7 @@ namespace FinancasParaCasais.Application.Notifications
 
         public NotificationService() => _notifications = new List<Notification>();
 
-        public void AddNotification(Notification notification) => _notifications.Add(notification);
+        public void AddNotifications(IReadOnlyCollection<Notification> notifications) => _notifications.AddRange(notifications);
 
         public IReadOnlyCollection<Notification> GetNotifications() => _notifications;
     }
