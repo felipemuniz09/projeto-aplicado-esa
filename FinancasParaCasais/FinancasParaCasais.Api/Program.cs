@@ -1,6 +1,8 @@
 using FinancasParaCasais.Api.Middlewares;
 using FinancasParaCasais.Api.Routers;
 using FinancasParaCasais.DI;
+using Microsoft.AspNetCore.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,17 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseNotificationMiddleware();
+
+app.UseExceptionHandler(exceptionHandler =>
+{
+    exceptionHandler.Run(async context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        context.Response.ContentType = Text.Plain;
+
+        await context.Response.WriteAsync("Ocorreu um erro.");
+    });
+});
 
 app.MapConjugesRoutes();
 app.MapDespesasRoutes();
