@@ -1,5 +1,6 @@
 ﻿using FinancasParaCasais.Application.AppServices;
 using FinancasParaCasais.Application.Commands;
+using FinancasParaCasais.Application.Interfaces.Notifications;
 using FinancasParaCasais.Domain.Entities;
 using FinancasParaCasais.Domain.Interfaces.Repositories;
 using FinancasParaCasais.Domain.Interfaces.Services;
@@ -12,12 +13,15 @@ namespace FinancasParaCasais.Application.Test.AppServices
         private readonly DespesaAppService _despesaAppService;
         private readonly Mock<IDespesaService> _despesaServiceMock;
         private readonly Mock<IDespesaRepository> _despesaRepositoryMock;
+        private readonly Mock<INotificationService> _notificationServiceMock;
 
         public DespesaAppServiceTest()
         {
             _despesaServiceMock = new Mock<IDespesaService>();
             _despesaRepositoryMock = new Mock<IDespesaRepository>();
-            _despesaAppService = new DespesaAppService(_despesaServiceMock.Object, _despesaRepositoryMock.Object);
+            _notificationServiceMock = new Mock<INotificationService>();
+            _despesaAppService = new DespesaAppService(
+                _despesaServiceMock.Object, _despesaRepositoryMock.Object, _notificationServiceMock.Object);
         }
 
         [Fact]

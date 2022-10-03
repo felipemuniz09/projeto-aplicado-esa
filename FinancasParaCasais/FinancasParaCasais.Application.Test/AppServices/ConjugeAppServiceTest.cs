@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinancasParaCasais.Application.AppServices;
 using FinancasParaCasais.Application.Commands;
+using FinancasParaCasais.Application.Interfaces.Notifications;
 using FinancasParaCasais.Domain.Entities;
 using FinancasParaCasais.Domain.Interfaces.Services;
 using Moq;
@@ -10,13 +11,15 @@ namespace FinancasParaCasais.Application.Test.AppServices
     public class ConjugeAppServiceTest
     {
         private readonly ConjugeAppService _conjugeAppService;
-        private readonly Mock<IConjugeService> _conjugeService;
+        private readonly Mock<IConjugeService> _conjugeServiceMock;
+        private readonly Mock<INotificationService> _notificationServiceMock;
 
         public ConjugeAppServiceTest()
         {
             var mapper = new Mock<IMapper>();
-            _conjugeService = new Mock<IConjugeService>();
-            _conjugeAppService = new ConjugeAppService(_conjugeService.Object, mapper.Object);
+            _conjugeServiceMock = new Mock<IConjugeService>();
+            _notificationServiceMock = new Mock<INotificationService>();
+            _conjugeAppService = new ConjugeAppService(_conjugeServiceMock.Object, mapper.Object, _notificationServiceMock.Object);
         }
 
         [Fact]
@@ -29,7 +32,7 @@ namespace FinancasParaCasais.Application.Test.AppServices
             _conjugeAppService.EditarConjuges(editarConjugesCommand);
 
             // Then
-            _conjugeService.Verify(c => c.EditarConjuge(It.IsAny<Conjuge>()), Times.Never());
+            _conjugeServiceMock.Verify(c => c.EditarConjuge(It.IsAny<Conjuge>()), Times.Never());
         }
 
         [Fact]
@@ -59,7 +62,7 @@ namespace FinancasParaCasais.Application.Test.AppServices
             _conjugeAppService.EditarConjuges(editarConjugesCommand);
 
             // Then
-            _conjugeService.Verify(c => c.EditarConjuge(It.IsAny<Conjuge>()), Times.Exactly(2));
+            _conjugeServiceMock.Verify(c => c.EditarConjuge(It.IsAny<Conjuge>()), Times.Exactly(2));
         }
     }
 }
