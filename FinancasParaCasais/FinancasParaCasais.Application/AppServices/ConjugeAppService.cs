@@ -37,7 +37,8 @@ namespace FinancasParaCasais.Application.AppServices
 
                     _conjugeService.EditarConjuge(conjuge);
 
-                    _notificationService.AddNotifications(conjuge.Notifications);
+                    if (conjuge != null)
+                        _notificationService.AddNotifications(conjuge.Notifications);
                 }
             }
         }
