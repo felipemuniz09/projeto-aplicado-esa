@@ -1,7 +1,6 @@
 using FinancasParaCasais.Api.Middlewares;
 using FinancasParaCasais.Api.Routers;
 using FinancasParaCasais.DI;
-using Microsoft.AspNetCore.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
