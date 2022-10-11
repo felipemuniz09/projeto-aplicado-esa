@@ -11,6 +11,7 @@ namespace FinancasParaCasais.Repository
         public DbSet<ConjugeEF> Conjuges { get; set; }
         public DbSet<DespesaEF> Despesas { get; set; }
         public DbSet<DespesaConjugeEF> DespesaConjuge { get; set; }
+        public DbSet<PagamentoEF> Pagamentos { get; set; }
 
         public FinancasParaCasaisContext(IConfiguration configuration)
         {
