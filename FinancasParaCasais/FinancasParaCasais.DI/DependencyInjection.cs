@@ -41,18 +41,21 @@ namespace FinancasParaCasais.DI
         {
             services.AddScoped<IConjugeAppService, ConjugeAppService>();
             services.AddScoped<IDespesaAppService, DespesaAppService>();
+            services.AddScoped<IPagamentoAppService, PagamentoAppService>();
         }
 
         private static void RegisterDomainServices(this IServiceCollection services)
         {
             services.AddScoped<IConjugeService, ConjugeService>();
             services.AddScoped<IDespesaService, DespesaService>();
+            services.AddScoped<IPagamentoService, PagamentoService>();
         }
 
         private static void RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<IConjugeRepository, ConjugeRepository>();
             services.AddScoped<IDespesaRepository, DespesaRepository>();
+            services.AddScoped<IPagamentoRepository, PagamentoRepository>();
         }
     }
 }
