@@ -4,7 +4,7 @@ namespace FinancasParaCasais.Application.Interfaces.Notifications
 {
     public interface INotificationService
     {
-        void AddNotifications(IReadOnlyCollection<Notification> notifications);
+        void AddNotifications(Notifiable<Notification> notifiable);
         IReadOnlyCollection<Notification> GetNotifications();
     }
 }

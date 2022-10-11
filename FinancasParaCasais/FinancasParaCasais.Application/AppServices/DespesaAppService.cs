@@ -24,7 +24,7 @@ namespace FinancasParaCasais.Application.AppServices
         {
             inserirDespesaCommand.Validar();
 
-            _notificationService.AddNotifications(inserirDespesaCommand.Notifications);
+            _notificationService.AddNotifications(inserirDespesaCommand);
 
             if (inserirDespesaCommand.IsValid)
             {
@@ -37,7 +37,7 @@ namespace FinancasParaCasais.Application.AppServices
 
                 _despesaService.InserirDespesa(despesa);
 
-                _notificationService.AddNotifications(despesa.Notifications);
+                _notificationService.AddNotifications(despesa);
             }
         }
 

@@ -24,7 +24,7 @@ namespace FinancasParaCasais.Application.AppServices
         {
             editarConjugesCommand.Validar();
 
-            _notificationService.AddNotifications(editarConjugesCommand.Notifications);
+            _notificationService.AddNotifications(editarConjugesCommand);
 
             if (!editarConjugesCommand.IsValid)     
                 return;
@@ -38,7 +38,7 @@ namespace FinancasParaCasais.Application.AppServices
                     _conjugeService.EditarConjuge(conjuge);
 
                     if (conjuge != null)
-                        _notificationService.AddNotifications(conjuge.Notifications);
+                        _notificationService.AddNotifications(conjuge);
                 }
             }
         }
