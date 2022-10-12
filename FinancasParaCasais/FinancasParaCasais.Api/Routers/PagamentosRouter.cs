@@ -1,5 +1,6 @@
 ﻿using FinancasParaCasais.Application.Commands;
 using FinancasParaCasais.Application.Interfaces.AppServices;
+using FinancasParaCasais.Application.Interfaces.QueryServices;
 
 namespace FinancasParaCasais.Api.Routers
 {
@@ -20,6 +21,8 @@ namespace FinancasParaCasais.Api.Routers
 
                 return Results.Ok();
             });
+
+            app.MapGet("/pagamentos", (IPagamentoQueryService pagamentoQueryService) => Results.Ok(pagamentoQueryService.ObterPagamentos()));
         }
     }
 }

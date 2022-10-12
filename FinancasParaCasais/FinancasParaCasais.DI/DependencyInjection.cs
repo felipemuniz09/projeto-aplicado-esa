@@ -35,6 +35,7 @@ namespace FinancasParaCasais.DI
         {
             services.AddScoped<IConjugeQueryService, ConjugeQueryService>();
             services.AddScoped<IDespesaQueryService, DespesaQueryService>();
+            services.AddScoped<IPagamentoQueryService, PagamentoQueryService>();
         }
 
         private static void RegisterAppServices(this IServiceCollection services)
