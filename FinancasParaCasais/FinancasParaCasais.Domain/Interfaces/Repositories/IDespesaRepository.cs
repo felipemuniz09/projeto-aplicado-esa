@@ -6,5 +6,6 @@ namespace FinancasParaCasais.Domain.Interfaces.Repositories
     {
         void InserirDespesa(Despesa despesa);
         void ExcluirDespesa(Guid codigo);
+        IReadOnlyCollection<Despesa> ObterDespesas();
     }
 }

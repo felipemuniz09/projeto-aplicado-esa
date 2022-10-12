@@ -18,5 +18,10 @@ namespace FinancasParaCasais.Repository.Repositories
 
             _context.SaveChanges();
         }
+
+        public IReadOnlyCollection<Conjuge> ObterConjuges()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

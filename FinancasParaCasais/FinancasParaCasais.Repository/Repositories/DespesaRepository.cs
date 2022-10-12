@@ -56,5 +56,10 @@ namespace FinancasParaCasais.Repository.Repositories
 
             transaction.Commit();
         }
+
+        public IReadOnlyCollection<Despesa> ObterDespesas()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
