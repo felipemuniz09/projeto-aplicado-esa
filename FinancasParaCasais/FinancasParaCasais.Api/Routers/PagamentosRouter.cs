@@ -13,6 +13,13 @@ namespace FinancasParaCasais.Api.Routers
 
                 return Results.Ok();
             });
+
+            app.MapDelete("/pagamentos", (IPagamentoAppService pagamentoAppService, Guid codigo) =>
+            {
+                pagamentoAppService.ExcluirPagamento(codigo);
+
+                return Results.Ok();
+            });
         }
     }
 }

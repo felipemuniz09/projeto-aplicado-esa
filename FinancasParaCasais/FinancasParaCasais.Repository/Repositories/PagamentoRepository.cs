@@ -18,5 +18,16 @@ namespace FinancasParaCasais.Repository.Repositories
 
             _context.SaveChanges();
         }
+
+        public void ExcluirPagamento(Guid codigo)
+        {
+            var pagamento = _context.Pagamentos.FirstOrDefault(p => p.Codigo == codigo);
+
+            if (pagamento == null) return;
+
+            _context.Pagamentos.Remove(pagamento);
+
+            _context.SaveChanges();
+        }
     }
 }
