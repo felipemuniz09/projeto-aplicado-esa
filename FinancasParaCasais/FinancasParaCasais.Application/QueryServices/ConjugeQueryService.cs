@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using FinancasParaCasais.Application.Interfaces.QueryServices;
 using FinancasParaCasais.Application.QueryResults;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
 namespace FinancasParaCasais.Application.QueryServices
@@ -13,7 +12,7 @@ namespace FinancasParaCasais.Application.QueryServices
 
         public IReadOnlyCollection<ConjugeQueryResult> ObterConjuges()
         {
-            using var connection = new SqlConnection(_configuration.GetConnectionString("FinancasParaCasaisDB"));
+            using var connection = ObterNovaConexao();
 
             const string sql = @"
                 SELECT  Codigo, Nome, Percentual
