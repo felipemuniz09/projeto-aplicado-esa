@@ -8,12 +8,14 @@ namespace FinancasParaCasais.Domain.Entities
         public Guid CodigoConjugePagou { get; private set; }
         public Guid CodigoConjugeRecebeu { get; private set; }
         public decimal Valor { get; private set; }
+        public DateTime DataHoraCriacao { get; set; }
 
         public Pagamento(Guid codigoConjugePagou, Guid codigoConjugeRecebeu, decimal valor)
         {
             CodigoConjugePagou = codigoConjugePagou;
             CodigoConjugeRecebeu = codigoConjugeRecebeu;
             Valor = valor;
+            DataHoraCriacao = DateTime.Now;
 
             const string mensagemCodigosIguais = "Código do cônjuge que pagou deve ser diferente do código do cônjuge que recebeu.";
 
