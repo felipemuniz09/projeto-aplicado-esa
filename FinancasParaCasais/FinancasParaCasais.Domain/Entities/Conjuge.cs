@@ -5,11 +5,13 @@ namespace FinancasParaCasais.Domain.Entities
 {
     public class Conjuge : Notifiable<Notification>
     {
+        public Guid Codigo { get; private set; }
         public string Nome { get; private set; }
         public int Percentual { get; private set; }
 
         public Conjuge(string nome, int percentual)
         {
+            Codigo = Guid.NewGuid();
             Nome = nome;
             Percentual = percentual;
 
