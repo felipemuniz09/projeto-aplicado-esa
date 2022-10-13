@@ -61,6 +61,13 @@ namespace FinancasParaCasais.Repository.Repositories
         {
             var despesasEF = _context.Despesas.ToList();
 
+            var codigosDespesasEF = despesasEF.Select(d => d.Codigo);
+
+            var listaDespesaConjugeEF = _context.DespesaConjuge.Where(d => codigosDespesasEF.Contains(d.CodigoDespesa));
+
+            foreach (var despesaEF in despesasEF)
+                despesaEF.ListaDespesaConjuge = listaDespesaConjugeEF.Where(d => d.CodigoDespesa == despesaEF.Codigo).ToList();
+
             return despesasEF.Select(_mapper.Map<Despesa>).ToList();
         }
     }
