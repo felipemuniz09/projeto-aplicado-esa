@@ -29,5 +29,10 @@ namespace FinancasParaCasais.Repository.Repositories
 
             _context.SaveChanges();
         }
+
+        public IReadOnlyCollection<Pagamento> ObterPagamentos()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

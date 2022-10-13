@@ -6,5 +6,6 @@ namespace FinancasParaCasais.Domain.Interfaces.Repositories
     {
         void InserirPagamento(Pagamento pagamento);
         void ExcluirPagamento(Guid codigo);
+        IReadOnlyCollection<Pagamento> ObterPagamentos();
     }
 }
