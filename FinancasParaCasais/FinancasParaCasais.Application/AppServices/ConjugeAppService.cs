@@ -73,10 +73,10 @@ namespace FinancasParaCasais.Application.AppServices
             foreach (var conjuge in conjuges)
             {
                 var saldoDespesa = 
-                    listaSaldoDespesaPorConjugeValueObject.FirstOrDefault(s => s.CodigoConjuge == conjuge.Codigo)?.Valor ?? 0;
+                    listaSaldoDespesaPorConjugeValueObject?.FirstOrDefault(s => s.CodigoConjuge == conjuge.Codigo)?.Valor ?? 0;
 
                 var saldoPagamento =
-                    listaSaldoPagamentoPorConjugeValueObject.FirstOrDefault(s => s.CodigoConjuge == conjuge.Codigo)?.Valor ?? 0;
+                    listaSaldoPagamentoPorConjugeValueObject?.FirstOrDefault(s => s.CodigoConjuge == conjuge.Codigo)?.Valor ?? 0;
 
                 var saldoPorConjuge = new SaldoPorConjugeDTO
                 {
