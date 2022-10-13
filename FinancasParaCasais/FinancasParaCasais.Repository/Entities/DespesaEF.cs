@@ -14,9 +14,12 @@ namespace FinancasParaCasais.Repository.Entities
         [Column("DataHoraCriacao")]
         public DateTime DataHoraCriacao { get; set; }
 
+        public IReadOnlyCollection<DespesaConjugeEF> ListaDespesaConjuge { get; set; }
+
         public DespesaEF()
         {
             Descricao = string.Empty;
+            ListaDespesaConjuge = new List<DespesaConjugeEF>();
         }
     }
 }
