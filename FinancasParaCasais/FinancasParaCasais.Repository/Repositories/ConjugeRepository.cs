@@ -21,7 +21,9 @@ namespace FinancasParaCasais.Repository.Repositories
 
         public IReadOnlyCollection<Conjuge> ObterConjuges()
         {
-            throw new NotImplementedException();
+            var conjugesEF = _context.Conjuges.ToList();
+
+            return conjugesEF.Select(c => _mapper.Map<Conjuge>(c)).ToList();
         }
     }
 }
