@@ -3,6 +3,7 @@ using FinancasParaCasais.Application.AppServices;
 using FinancasParaCasais.Application.Commands;
 using FinancasParaCasais.Application.Interfaces.Notifications;
 using FinancasParaCasais.Domain.Entities;
+using FinancasParaCasais.Domain.Interfaces.Repositories;
 using FinancasParaCasais.Domain.Interfaces.Services;
 using Moq;
 
@@ -13,13 +14,26 @@ namespace FinancasParaCasais.Application.Test.AppServices
         private readonly ConjugeAppService _conjugeAppService;
         private readonly Mock<IConjugeService> _conjugeServiceMock;
         private readonly Mock<INotificationService> _notificationServiceMock;
+        private readonly Mock<IDespesaService> _despesaServiceMock;
+        private readonly Mock<IPagamentoService> _pagamentoServiceMock;
+        private readonly Mock<IConjugeRepository> _conjugeRepositoryMock;
 
         public ConjugeAppServiceTest()
         {
             var mapper = new Mock<IMapper>();
             _conjugeServiceMock = new Mock<IConjugeService>();
             _notificationServiceMock = new Mock<INotificationService>();
-            _conjugeAppService = new ConjugeAppService(_conjugeServiceMock.Object, mapper.Object, _notificationServiceMock.Object);
+            _despesaServiceMock = new Mock<IDespesaService>();
+            _pagamentoServiceMock = new Mock<IPagamentoService>();
+            _conjugeRepositoryMock = new Mock<IConjugeRepository>();
+            
+            _conjugeAppService = new ConjugeAppService(
+                _conjugeServiceMock.Object, 
+                mapper.Object, 
+                _notificationServiceMock.Object,
+                _despesaServiceMock.Object,
+                _pagamentoServiceMock.Object,
+                _conjugeRepositoryMock.Object);
         }
 
         [Fact]
