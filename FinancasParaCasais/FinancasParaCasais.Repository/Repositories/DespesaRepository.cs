@@ -59,7 +59,9 @@ namespace FinancasParaCasais.Repository.Repositories
 
         public IReadOnlyCollection<Despesa> ObterDespesas()
         {
-            throw new NotImplementedException();
+            var despesasEF = _context.Despesas.ToList();
+
+            return despesasEF.Select(_mapper.Map<Despesa>).ToList();
         }
     }
 }

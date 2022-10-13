@@ -23,7 +23,7 @@ namespace FinancasParaCasais.Repository.Repositories
         {
             var conjugesEF = _context.Conjuges.ToList();
 
-            return conjugesEF.Select(c => _mapper.Map<Conjuge>(c)).ToList();
+            return conjugesEF.Select(_mapper.Map<Conjuge>).ToList();
         }
     }
 }
