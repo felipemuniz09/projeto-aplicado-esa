@@ -32,7 +32,9 @@ namespace FinancasParaCasais.Repository.Repositories
 
         public IReadOnlyCollection<Pagamento> ObterPagamentos()
         {
-            throw new NotImplementedException();
+            var pagamentosEF = _context.Pagamentos.ToList();
+
+            return pagamentosEF.Select(_mapper.Map<Pagamento>).ToList();
         }
     }
 }
