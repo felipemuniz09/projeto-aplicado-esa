@@ -5,6 +5,8 @@ using FinancasParaCasais.Application.Interfaces.Notifications;
 using FinancasParaCasais.Domain.Entities;
 using FinancasParaCasais.Domain.Interfaces.Repositories;
 using FinancasParaCasais.Domain.Interfaces.Services;
+using FinancasParaCasais.Domain.ValueObject;
+using FluentAssertions;
 using Moq;
 
 namespace FinancasParaCasais.Application.Test.AppServices
@@ -77,6 +79,66 @@ namespace FinancasParaCasais.Application.Test.AppServices
 
             // Then
             _conjugeServiceMock.Verify(c => c.EditarConjuge(It.IsAny<Conjuge>()), Times.Exactly(2));
+        }
+
+        [Fact]
+        public void DeveCalcularSaldoDeCadaConjuge()
+        {
+            // Given
+            var conjuges = new List<Conjuge>
+            {
+                new Conjuge("Oscar", 27),
+                new Conjuge("Hortência", 73)
+            };
+
+            _conjugeRepositoryMock.Setup(c => c.ObterConjuges()).Returns(conjuges);
+
+            // When
+            var listaSaldoPorConjuge = _conjugeAppService.CalcularSaldoPorConjuge();
+
+            // Then
+            listaSaldoPorConjuge.Should().HaveCount(2);
+        }
+
+        [Fact]
+        public void DeveCalcularSaldoCorretoDoConjuge()
+        {
+            // Given
+            var conjugeOscar = new Conjuge("Oscar", 27);
+            var conjugeHortencia = new Conjuge("Hortência", 73);
+
+            var conjuges = new List<Conjuge> { conjugeOscar, conjugeHortencia };
+
+            _conjugeRepositoryMock.Setup(c => c.ObterConjuges()).Returns(conjuges);
+
+            var listaSaldoDespesaPorConjuge = new List<SaldoDespesaPorConjugeValueObject>
+            {
+                new SaldoDespesaPorConjugeValueObject { CodigoConjuge = conjugeOscar.Codigo, Valor = 100 },
+                new SaldoDespesaPorConjugeValueObject { CodigoConjuge = conjugeHortencia.Codigo, Valor = -100 }
+            };
+
+            _despesaServiceMock.Setup(d => d.CalcularSaldoDespesaPorConjuge(conjuges)).Returns(listaSaldoDespesaPorConjuge);
+
+            var listaSaldoPagamentoPorConjuge = new List<SaldoPagamentoPorConjugeValueObject>
+            {
+                new SaldoPagamentoPorConjugeValueObject { CodigoConjuge = conjugeOscar.Codigo, Valor = -80 },
+                new SaldoPagamentoPorConjugeValueObject { CodigoConjuge = conjugeHortencia.Codigo, Valor = 80 }
+            };
+
+            var codigosConjuges = conjuges.Select(c => c.Codigo).ToList();
+
+            _pagamentoServiceMock
+                .Setup(p => p.CalcularSaldoPagamentoPorConjuge(codigosConjuges)).Returns(listaSaldoPagamentoPorConjuge);
+
+            // When
+            var listaSaldoPorConjuge = _conjugeAppService.CalcularSaldoPorConjuge();
+
+            // Then
+            var saldoOscar = listaSaldoPorConjuge?.FirstOrDefault(s => s.NomeConjuge == conjugeOscar.Nome)?.Valor ?? 0;
+            var saldoHortencia = listaSaldoPorConjuge?.FirstOrDefault(s => s.NomeConjuge == conjugeHortencia.Nome)?.Valor ?? 0;
+
+            saldoOscar.Should().Be(20);
+            saldoHortencia.Should().Be(-20);
         }
     }
 }
