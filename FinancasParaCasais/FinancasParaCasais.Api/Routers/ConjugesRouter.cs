@@ -16,6 +16,9 @@ namespace FinancasParaCasais.Api.Routers
 
                 return Results.Ok();
             });
+
+            app.MapGet("/conjuges/saldo", (IConjugeAppService conjugeAppService) =>
+                Results.Ok(conjugeAppService.CalcularSaldoPorConjuge()));
         }
     }
 }
