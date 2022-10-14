@@ -42,7 +42,8 @@ namespace FinancasParaCasais.DI
         {
             cfg.CreateMap<ConjugeEF, Conjuge>();
             cfg.CreateMap<PagamentoEF, Pagamento>();
-            cfg.CreateMap<DespesaEF, Despesa>();
+            cfg.CreateMap<DespesaEF, Despesa>()
+                .ForMember(d => d.Pagamentos, opt => opt.MapFrom(src => src.ListaDespesaConjuge));
             cfg.CreateMap<DespesaConjugeEF, PagamentoDespesaValueObject>();
         }
     }
