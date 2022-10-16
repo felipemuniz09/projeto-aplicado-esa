@@ -32,30 +32,10 @@ jobs:
       - name: dotnet publish
         run: dotnet publish ${{env.api-project}} -c Debug -o ${{env.DOTNET_ROOT}}/myapp
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
-
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: .net-app
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'financas-para-casais'
-          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8501526D0D924D27A6D8BBAC99577B99 }}
-          package: .
+          package: '${{env.DOTNET_ROOT}}/myapp'
