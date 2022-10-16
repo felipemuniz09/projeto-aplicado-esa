@@ -15,6 +15,7 @@ jobs:
     
     env:
       solution: ./FinancasParaCasais/FinancasParaCasais.sln
+      api-project: ./FinancasParaCasais/FinancasParaCasais.Api/FinancasParaCasais.Api.csproj
 
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +30,7 @@ jobs:
         run: dotnet build ${{env.solution}} --configuration Debug
 
       - name: dotnet publish
-        run: dotnet publish ${{env.solution}} -c Debug -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish ${{env.api-project}} -c Debug -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
