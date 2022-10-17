@@ -15,7 +15,7 @@ namespace FinancasParaCasais.Application.AppServices
         private readonly IMapper _mapper;
         private readonly INotificationService _notificationService;
         private readonly IDespesaService _despesaService;
-        private readonly IPagamentoService _pagamentoService;
+        private readonly ITransferenciaService _pagamentoService;
         private readonly IConjugeRepository _conjugeRepository;
 
         public ConjugeAppService(
@@ -23,7 +23,7 @@ namespace FinancasParaCasais.Application.AppServices
             IMapper mapper, 
             INotificationService notificationService, 
             IDespesaService despesaService,
-            IPagamentoService pagamentoService,
+            ITransferenciaService pagamentoService,
             IConjugeRepository conjugeRepository)
         {
             _conjugeService = conjugeService;
@@ -66,7 +66,7 @@ namespace FinancasParaCasais.Application.AppServices
             var codigosConjuges = conjuges.Select(c => c.Codigo).ToList();
 
             var listaSaldoDespesaPorConjugeValueObject = _despesaService.CalcularSaldoDespesaPorConjuge(conjuges);
-            var listaSaldoPagamentoPorConjugeValueObject = _pagamentoService.CalcularSaldoPagamentoPorConjuge(codigosConjuges);
+            var listaSaldoTransferenciaPorConjugeValueObject = _pagamentoService.CalcularSaldoTransferenciaPorConjuge(codigosConjuges);
 
             var listaSaldoPorConjugeDTO = new List<SaldoPorConjugeDTO>();
 
@@ -76,7 +76,7 @@ namespace FinancasParaCasais.Application.AppServices
                     listaSaldoDespesaPorConjugeValueObject?.FirstOrDefault(s => s.CodigoConjuge == conjuge.Codigo)?.Valor ?? 0;
 
                 var saldoPagamento =
-                    listaSaldoPagamentoPorConjugeValueObject?.FirstOrDefault(s => s.CodigoConjuge == conjuge.Codigo)?.Valor ?? 0;
+                    listaSaldoTransferenciaPorConjugeValueObject?.FirstOrDefault(s => s.CodigoConjuge == conjuge.Codigo)?.Valor ?? 0;
 
                 var saldoPorConjuge = new SaldoPorConjugeDTO
                 {

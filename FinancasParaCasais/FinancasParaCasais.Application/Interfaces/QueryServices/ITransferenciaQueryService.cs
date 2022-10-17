@@ -2,8 +2,8 @@
 
 namespace FinancasParaCasais.Application.Interfaces.QueryServices
 {
-    public interface IPagamentoQueryService
+    public interface ITransferenciaQueryService
     {
-        IReadOnlyCollection<PagamentoQueryResult> ObterPagamentos();
+        IReadOnlyCollection<TransferenciaQueryResult> ObterTransferencias();
     }
 }

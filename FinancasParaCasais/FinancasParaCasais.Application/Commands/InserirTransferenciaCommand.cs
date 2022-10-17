@@ -1,6 +1,6 @@
 ﻿namespace FinancasParaCasais.Application.Commands
 {
-    public class InserirPagamentoCommand
+    public class InserirTransferenciaCommand
     {
         public Guid CodigoConjugePagou { get; set; }
         public Guid CodigoConjugeRecebeu { get; set; }

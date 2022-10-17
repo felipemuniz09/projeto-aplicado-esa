@@ -3,10 +3,10 @@ using FinancasParaCasais.Domain.ValueObject;
 
 namespace FinancasParaCasais.Domain.Interfaces.Services
 {
-    public interface IPagamentoService
+    public interface ITransferenciaService
     {
-        void InserirPagamento(Pagamento pagamento);
-        IReadOnlyCollection<SaldoPagamentoPorConjugeValueObject> CalcularSaldoPagamentoPorConjuge(
+        void InserirTransferencia(Transferencia transferencia);
+        IReadOnlyCollection<SaldoTransferenciaPorConjugeValueObject> CalcularSaldoTransferenciaPorConjuge(
             IReadOnlyCollection<Guid> codigosConjuges);
     }
 }

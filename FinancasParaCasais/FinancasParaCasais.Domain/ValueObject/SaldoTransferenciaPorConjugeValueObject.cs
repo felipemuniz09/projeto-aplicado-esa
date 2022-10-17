@@ -1,6 +1,6 @@
 ﻿namespace FinancasParaCasais.Domain.ValueObject
 {
-    public class SaldoPagamentoPorConjugeValueObject
+    public class SaldoTransferenciaPorConjugeValueObject
     {
         public Guid CodigoConjuge { get; set; }
         public decimal Valor { get; set; }

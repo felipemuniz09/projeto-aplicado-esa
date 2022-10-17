@@ -2,8 +2,8 @@
 
 namespace FinancasParaCasais.Repository.Entities
 {
-    [Table("Pagamentos")]
-    public class PagamentoEF : BaseEntityEF
+    [Table("Transferencias")]
+    public class TransferenciaEF : BaseEntityEF
     {
         [Column("CodigoConjugePagou")]
         public Guid CodigoConjugePagou { get; set; }

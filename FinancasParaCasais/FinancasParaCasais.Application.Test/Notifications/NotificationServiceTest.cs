@@ -17,10 +17,10 @@ namespace FinancasParaCasais.Application.Test.Notifications
         public void DeveInserirNotificacoesQuandoObjetoEstiverInvalido()
         {
             // Given
-            var pagamento = new Pagamento(Guid.NewGuid(), Guid.Empty, -1);
+            var transferencia = new Transferencia(Guid.NewGuid(), Guid.Empty, -1);
 
             // When
-            _notificationService.AddNotifications(pagamento);
+            _notificationService.AddNotifications(transferencia);
 
             // Then
             _notificationService.GetNotifications().Should().HaveCount(2);
@@ -30,10 +30,10 @@ namespace FinancasParaCasais.Application.Test.Notifications
         public void NaoDeveInserirNotificacoesQuandoObjetoEstiverValido()
         {
             // Given
-            var pagamento = new Pagamento(Guid.NewGuid(), Guid.NewGuid(), 1);
+            var transferencia = new Transferencia(Guid.NewGuid(), Guid.NewGuid(), 1);
 
             // When
-            _notificationService.AddNotifications(pagamento);
+            _notificationService.AddNotifications(transferencia);
 
             // Then
             _notificationService.GetNotifications().Should().BeEmpty();

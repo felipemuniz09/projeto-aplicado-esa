@@ -27,7 +27,7 @@ namespace FinancasParaCasais.DI
             cfg.CreateMap<EditarConjugesCommand.ConjugeCommand, Conjuge>();
             cfg.CreateMap<InserirDespesaCommand, Despesa>();
             cfg.CreateMap<InserirDespesaCommand.PagamentoDespesaCommand, PagamentoDespesaValueObject>();
-            cfg.CreateMap<InserirPagamentoCommand, Pagamento>();
+            cfg.CreateMap<InserirTransferenciaCommand, Transferencia>();
         }
 
         private static void CreateMapFromDomainToRepository(this IMapperConfigurationExpression cfg)
@@ -35,13 +35,13 @@ namespace FinancasParaCasais.DI
             cfg.CreateMap<Conjuge, ConjugeEF>();
             cfg.CreateMap<Despesa, DespesaEF>();
             cfg.CreateMap<PagamentoDespesaValueObject, DespesaConjugeEF>();
-            cfg.CreateMap<Pagamento, PagamentoEF>();
+            cfg.CreateMap<Transferencia, TransferenciaEF>();
         }
 
         private static void CreateMapFromRepositoryToDomain(this IMapperConfigurationExpression cfg)
         {
             cfg.CreateMap<ConjugeEF, Conjuge>();
-            cfg.CreateMap<PagamentoEF, Pagamento>();
+            cfg.CreateMap<TransferenciaEF, Transferencia>();
             cfg.CreateMap<DespesaEF, Despesa>()
                 .ForMember(d => d.Pagamentos, opt => opt.MapFrom(src => src.ListaDespesaConjuge));
             cfg.CreateMap<DespesaConjugeEF, PagamentoDespesaValueObject>();

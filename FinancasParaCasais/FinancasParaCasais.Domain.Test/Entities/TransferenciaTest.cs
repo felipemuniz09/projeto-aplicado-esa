@@ -3,26 +3,26 @@ using FluentAssertions;
 
 namespace FinancasParaCasais.Domain.Test.Entities
 {
-    public class PagamentoTest
+    public class TransferenciaTest
     {
         [Fact]
         public void DeveConsiderarInvalidoQuandoCodigoConjugePagouForVazio()
         {
             // When
-            var pagamento = new Pagamento(Guid.Empty, Guid.NewGuid(), 10);
+            var transferencia = new Transferencia(Guid.Empty, Guid.NewGuid(), 10);
 
             // Then
-            pagamento.Notifications.Should().Contain(n => n.Message == "Código do cônjuge que pagou deve ser informado.");
+            transferencia.Notifications.Should().Contain(n => n.Message == "Código do cônjuge que pagou deve ser informado.");
         }
 
         [Fact]
         public void DeveConsiderarInvalidoQuandoCodigoConjugeRecebeuForVazio()
         {
             // When
-            var pagamento = new Pagamento(Guid.NewGuid(), Guid.Empty, 10);
+            var transferencia = new Transferencia(Guid.NewGuid(), Guid.Empty, 10);
 
             // Then
-            pagamento.Notifications.Should().Contain(n => n.Message == "Código do cônjuge que recebeu deve ser informado.");
+            transferencia.Notifications.Should().Contain(n => n.Message == "Código do cônjuge que recebeu deve ser informado.");
         }
 
         [Fact]
@@ -32,10 +32,10 @@ namespace FinancasParaCasais.Domain.Test.Entities
             var codigoConjuge = Guid.NewGuid();
 
             // When
-            var pagamento = new Pagamento(codigoConjuge, codigoConjuge, 10);
+            var transferencia = new Transferencia(codigoConjuge, codigoConjuge, 10);
 
             // Then
-            pagamento.Notifications.Should().Contain(
+            transferencia.Notifications.Should().Contain(
                 n => n.Message == "Código do cônjuge que pagou deve ser diferente do código do cônjuge que recebeu.");
         }
 
@@ -45,10 +45,10 @@ namespace FinancasParaCasais.Domain.Test.Entities
         public void DeveConsiderarInvalidoQuandoValorForNegativoOuZero(decimal valor)
         {
             // When
-            var pagamento = new Pagamento(Guid.NewGuid(), Guid.NewGuid(), valor);
+            var transferencia = new Transferencia(Guid.NewGuid(), Guid.NewGuid(), valor);
 
             // Then
-            pagamento.Notifications.Should().Contain(n => n.Message == "Valor deve ser maior que zero.");
+            transferencia.Notifications.Should().Contain(n => n.Message == "Valor deve ser maior que zero.");
         }
     }
 }

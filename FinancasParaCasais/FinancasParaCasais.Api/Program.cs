@@ -32,6 +32,6 @@ app.UseExceptionHandler(exceptionHandler =>
 
 app.MapConjugesRoutes();
 app.MapDespesasRoutes();
-app.MapPagamentosRoutes();
+app.MapTransferenciasRoutes();
 
 app.Run();

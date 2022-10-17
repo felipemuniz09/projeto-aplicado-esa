@@ -17,7 +17,7 @@ namespace FinancasParaCasais.Application.Test.AppServices
         private readonly Mock<IConjugeService> _conjugeServiceMock;
         private readonly Mock<INotificationService> _notificationServiceMock;
         private readonly Mock<IDespesaService> _despesaServiceMock;
-        private readonly Mock<IPagamentoService> _pagamentoServiceMock;
+        private readonly Mock<ITransferenciaService> _transferenciaServiceMock;
         private readonly Mock<IConjugeRepository> _conjugeRepositoryMock;
 
         public ConjugeAppServiceTest()
@@ -26,7 +26,7 @@ namespace FinancasParaCasais.Application.Test.AppServices
             _conjugeServiceMock = new Mock<IConjugeService>();
             _notificationServiceMock = new Mock<INotificationService>();
             _despesaServiceMock = new Mock<IDespesaService>();
-            _pagamentoServiceMock = new Mock<IPagamentoService>();
+            _transferenciaServiceMock = new Mock<ITransferenciaService>();
             _conjugeRepositoryMock = new Mock<IConjugeRepository>();
             
             _conjugeAppService = new ConjugeAppService(
@@ -34,7 +34,7 @@ namespace FinancasParaCasais.Application.Test.AppServices
                 mapper.Object, 
                 _notificationServiceMock.Object,
                 _despesaServiceMock.Object,
-                _pagamentoServiceMock.Object,
+                _transferenciaServiceMock.Object,
                 _conjugeRepositoryMock.Object);
         }
 
@@ -119,16 +119,16 @@ namespace FinancasParaCasais.Application.Test.AppServices
 
             _despesaServiceMock.Setup(d => d.CalcularSaldoDespesaPorConjuge(conjuges)).Returns(listaSaldoDespesaPorConjuge);
 
-            var listaSaldoPagamentoPorConjuge = new List<SaldoPagamentoPorConjugeValueObject>
+            var listaSaldoPagamentoPorConjuge = new List<SaldoTransferenciaPorConjugeValueObject>
             {
-                new SaldoPagamentoPorConjugeValueObject { CodigoConjuge = conjugeOscar.Codigo, Valor = -80 },
-                new SaldoPagamentoPorConjugeValueObject { CodigoConjuge = conjugeHortencia.Codigo, Valor = 80 }
+                new SaldoTransferenciaPorConjugeValueObject { CodigoConjuge = conjugeOscar.Codigo, Valor = -80 },
+                new SaldoTransferenciaPorConjugeValueObject { CodigoConjuge = conjugeHortencia.Codigo, Valor = 80 }
             };
 
             var codigosConjuges = conjuges.Select(c => c.Codigo).ToList();
 
-            _pagamentoServiceMock
-                .Setup(p => p.CalcularSaldoPagamentoPorConjuge(codigosConjuges)).Returns(listaSaldoPagamentoPorConjuge);
+            _transferenciaServiceMock
+                .Setup(p => p.CalcularSaldoTransferenciaPorConjuge(codigosConjuges)).Returns(listaSaldoPagamentoPorConjuge);
 
             // When
             var listaSaldoPorConjuge = _conjugeAppService.CalcularSaldoPorConjuge();
